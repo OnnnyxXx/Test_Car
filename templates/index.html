@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Conversion</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: black;
+        }
+
+        .forms {
+            color: white;
+            display: inline-block;
+            text-align: left;
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .forms label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .forms input[type="text"] {
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .forms button[type="submit"] {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .forms button[type="submit"]:hover {
+            background-color: #3e8e41;
+        }
+
+        .vertical-line {
+            border-left: 2px solid #ccc;
+            height: 100vh;
+            position: absolute;
+            left: 50%;
+            margin-left: -1px;
+        }
+
+        .container_copy {
+            color: white;
+            display: inline-block;
+            text-align: center;
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container_copy h1 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<h1>Check Code</h1>
+<form method="POST" class="forms">
+    <label for="code">Code :</label>
+    <input type="text" name="code"/>
+    <button type="submit" value="Send">GO</button>
+</form>
+
+<div class="container_copy right-content">
+    Messages: {{ result }}
+    <hr>
+    Status: {{ status }}
+</div>
+</body>
+</html>
