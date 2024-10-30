@@ -1,5 +1,7 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from starlette.responses import FileResponse
+
+from scr.car.models import Decode
 
 router = APIRouter(
     tags=['Car']
@@ -21,18 +23,34 @@ async def download_file(file_name: str):
     return {"messages": 'я на 5050'}
 
 
-@router.get('/decode/login/password')
-async def decode(login: str, password: str):
+@router.post('/decode/login/password')
+async def decode(user: Decode):
     """
     As you asked, Karl. I made a function to decrypt your password and login. I hope you won't forget this too...
     """
-    if login == '!@$?<?><!@><M!@#!' and password == '%@)(*{!@!1!&%':
+    if user.login == '!@$?<?><!@><M!@#!' and user.password == '%@)(*{!@!1!&%':
         file_location = 'secret/check.txt'
         return FileResponse(file_location, media_type='application/octet-stream', filename='fast.txt')
+    if user.login == 'Karl' and user.email == 'jwt.decode@gmai.com':
+        return 'Нужно это в jwt: Karl Mitnik'
     return {'messages': 'NO',
             'status': 400}
 
 
-@router.get('/login/download/')
+@router.post('/login/download/')
 async def download_if_login(login: str, password: str):
-    pass
+    """
+    :param login:
+        your login -> login
+
+    :param password:
+         your password -> password
+
+    :return:
+        jwt.io
+    """
+    if login == 'login' and password == 'password':
+        file_location = 'secret/jwt_postgres.txt'
+        return FileResponse(file_location, media_type='application/octet-stream', filename='jwt.txt')
+    else:
+        raise HTTPException(status_code=401, detail="Иди нахуй!")

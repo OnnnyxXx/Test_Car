@@ -2,6 +2,7 @@ from fastapi import FastAPI, Request, Form, Depends
 from fastapi.templating import Jinja2Templates
 from starlette.responses import HTMLResponse
 
+from database import engine, Base
 from secret.jwt_code import secret
 from scr.car.router import router as car_router
 
@@ -28,4 +29,12 @@ async def check_code(request: Request, code: str = Form(...)):
 
 
 app.include_router(car_router)
+
+
 # uvicorn main:app --reload
+
+@app.on_event("startup")
+async def on_startup():
+    async with engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
+
