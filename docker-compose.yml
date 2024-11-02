@@ -1,45 +1,25 @@
-version: '3.9'
+version: '3.8'
 
 services:
-  postgres:
-    image: postgres:latest
-    container_name: postgres_container
+  web:
+    build: .
+    command: bash -c "uvicorn main:app --host 0.0.0.0 --port 8000 --reload"
+    volumes:
+      - .:/car
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15
     environment:
       POSTGRES_USER: postgres_user
       POSTGRES_PASSWORD: postgres_password
       POSTGRES_DB: postgres_db
-      PGDATA: "/var/lib/postgresql/data/pgdata"
-
     volumes:
-      - ../2. Init Database:/docker-entrypoint-initdb.d
-      - pgdata:/var/lib/postgresql/data
-    deploy:
-      resources:
-        limits:
-          cpus: '0.50'
-          memory: 512M
-        reservations:
-          cpus: '0.25'
-          memory: 256M
-    command: >
-      postgres -c max_connections=1000
-               -c shared_buffers=256MB
-               -c effective_cache_size=768MB
-               -c maintenance_work_mem=64MB
-               -c checkpoint_completion_target=0.7
-               -c wal_buffers=16MB
-               -c default_statistics_target=100
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U postgres_user -d postgres_db" ]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-    restart: unless-stopped
-    tty: true
-    stdin_open: true
+      - postgres_data:/var/lib/postgresql/data/
 
-    ports:
-      - "5432:5432"
   pgadmin:
     image: dpage/pgadmin4
     environment:
@@ -48,8 +28,7 @@ services:
     ports:
       - "5050:80"
     depends_on:
-      - postgres
+      - db
 
 volumes:
-  pgdata:
-    driver: local
+  postgres_data:

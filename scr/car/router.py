@@ -4,7 +4,7 @@ from starlette.responses import FileResponse
 from scr.car.models import Decode
 
 router = APIRouter(
-    tags=['Car']
+    tags=['Files']
 )
 
 
