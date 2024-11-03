@@ -6,4 +6,4 @@ class Decode(BaseModel):
     username: str = 'Karl'
     login: str
     password: str
-    email: str = 'Пока-что не нужно'
+    email: str = 'Нужно найти в db'

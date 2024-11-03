@@ -1,7 +1,4 @@
-from fastapi import APIRouter, HTTPException
-from starlette.responses import FileResponse
-
-from scr.car.models import Decode
+from fastapi import APIRouter
 from scr.database.models import DBConnect
 
 router = APIRouter(
@@ -15,5 +12,8 @@ async def info_db():
 
 
 @router.post('/connect/db/')
-async def connect(connect_to: DBConnect):
-    return connect_to
+async def connect(check_code: str):
+    connect_to_db = DBConnect()
+    if check_code == ';LK12%!@$SA#@$DJ124@$#!@*&@_!*@$:lxkn?<??@><$@':
+        return connect_to_db
+    return 'You need to read fast'
