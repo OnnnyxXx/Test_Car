@@ -2,14 +2,14 @@ from pydantic import BaseModel
 
 
 class DBConnect(BaseModel):
-    Host: str = 'dpg-csjn03m8ii6s73d6048g-a.oregon-postgres.render.com'
+    Host: str = 'dpg-ctg5q9popnds73dlkda0-a.oregon-postgres.render.com'
     Port: str = 'Обычно это 5432'
-    Maintenance: str = 'postgres_db_yd4o'
-    Username: str = 'postgres_user'
-    Password: str = '(например, pWUfrJ3QzD52cp7CvvxrKhmMdr9jNK2m)'
+    Maintenance: str = 'db_9yw8'
+    Username: str = 'db_9yw8_user'
+    Password: str = '(например, 7AXckoIVmJdNGut6IOwcA3gtstoHqKdw)'
 
 
-# db:
+# db:postgresql://db_9yw8_user:7AXckoIVmJdNGut6IOwcA3gtstoHqKdw@dpg-ctg5q9popnds73dlkda0-a/db_9yw8
 #   image: postgres:15
 #   environment:
 #     POSTGRES_USER: postgres_user

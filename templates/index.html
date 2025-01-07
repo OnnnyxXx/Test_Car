@@ -64,33 +64,42 @@
                font-weight: bold;
                margin-bottom: 10px;
            }
+
+button {
+  background-color: white;
+  color: black;
+  border: 2px solid #04AA6D;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+    transition-duration: 0.4s;
+
+  border-radius: 50px;
+}
+button:hover {
+  background-color: #04AA6D; /* Green */
+  color: white;
+}
     </style>
-    <script>
-        function checkResult() {
-            const result = "{{ result }}";
-            if (result === "Fuck you and your hack skill") {
-                document.body.style.background = "#2f0303";
-                document.body.style.backgroundImage = "url('https://img0.reactor.cc/pics/post/full/%D0%B7%D0%B0%D0%B4%D1%80%D0%BE%D1%82-art-%D1%81%D0%BC%D0%B5%D1%85-580938.jpeg')";
-            }
-            if (result === "You win car") {
-                document.body.style.background = "#2f0303";
-                document.body.style.backgroundImage = "url('https://newcdn.igromania.ru/mnt/articles/9/3/c/8/9/a/32337/html/more/_fdd363ee92996e66c33571d_1920xH.webp')";
-                document.body.style.backgroundSize = "cover";
-            }
-        }
-    </script>
+
 
 </head>
 <body onload="checkResult()">
 
 <h1>Check Code</h1>
+<button>
+    <a href="/views/images/">Gallery</a>
+</button>
+
 <form method="POST" class="forms">
     <label for="code">Code :</label>
     <input type="text" name="code"/>
     <button type="submit" value="Send">GO</button>
 </form>
 
-<div class="container_copy right-content">
+<div class="container_copy right-content" style="color: black;">
     Messages: {{ result }}
     <hr>
     Status: {{ status }}
@@ -101,4 +110,21 @@
 1 + 1 = ты долбаеб
 -->
 <a href="https://www.youtube.com/watch?v=EY0qVO9Mwh8&list=RDlnpe29tsKdg&index=14&ab_channel=SHAPKA"></a>
+
+    <!--    https://media1.tenor.com/m/5FmEfob3bmMAAAAd/laughing-fat.gif-->
+    <script>
+        function checkResult() {
+            const result = "{{ result }}";
+            if (result === "Fuck you and your hack skill") {
+                document.body.style.background = "#2f0303";
+                document.body.style.backgroundImage = "url('https://img0.reactor.cc/pics/post/full/%D0%B7%D0%B0%D0%B4%D1%80%D0%BE%D1%82-art-%D1%81%D0%BC%D0%B5%D1%85-580938.jpeg')";
+            }
+            if (result === "You win car") {
+                document.body.style.background = "#2f0303";
+                document.body.style.backgroundImage = "url('https://media1.tenor.com/m/DxVpMWrxdfUAAAAC/anime-wink.gif')";
+                document.body.style.backgroundSize = "cover";
+            }
+        }
+    </script>
+
 </html>
