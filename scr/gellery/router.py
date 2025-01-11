@@ -1,6 +1,6 @@
 import os
 
-from fastapi import APIRouter, Request, File, UploadFile
+from fastapi import APIRouter, Request, File, UploadFile, HTTPException
 from starlette.responses import FileResponse, HTMLResponse
 from starlette.templating import Jinja2Templates
 
@@ -14,8 +14,10 @@ templates = Jinja2Templates(directory="templates")
 async def upload_images(file: UploadFile = File(...)):
     try:
         file_location = f"static/images/{file.filename}"
+        os.makedirs(os.path.dirname(file_location), exist_ok=True)
+
         with open(file_location, 'wb+') as file_objects:
-            file_objects.write(file.file.read())
+            file_objects.write(await file.read())
 
         return {'Info: ': FileResponse(str(file)).path, "location": file_location}
 
@@ -39,12 +41,17 @@ async def delete_images(images: str):
 
         deletes existing photos
     """
+    file_location = f"static/images/{images}"
+
     try:
-        file_location = f"static/images/{images}"
+        if not os.path.exists(file_location):
+            raise HTTPException(status_code=404, detail="File not found")
+
         os.remove(file_location)
-        return True
+        return {"message": "File deleted successfully"}
+
     except Exception as ex:
-        return {"messages": ex.args}
+        raise HTTPException(status_code=500, detail=str(ex))
 
 
 @router.get('/views/images/', response_class=HTMLResponse)
